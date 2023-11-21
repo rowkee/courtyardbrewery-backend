@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Customer, Beer, Order, Merch, Review, Rating
+from .models import Customer, Beer, Order, Merch, Review, Rating, Image
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,7 +16,6 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer 
         fields = '__all__'
-
 
 class BeerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,4 +43,9 @@ class RatingSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order 
+        fields = '__all__'
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
         fields = '__all__'
