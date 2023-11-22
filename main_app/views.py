@@ -1,11 +1,14 @@
 import boto3
 import uuid
 import os
-from django.contrib.auth.models import User, Group
 from django.shortcuts import redirect
+from django.contrib.auth.models import User, Group
 from .models import Beer, Customer, Order, Review, Rating, Merch, Image
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
 from .serializers import BeerSerializer, CustomerSerializer, OrderSerializer, ReviewSerializer, RatingSerializer, MerchSerializer, UserSerializer, GroupSerializer, ImageSerializer
 # Create your views here.
 
@@ -17,7 +20,39 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]   
+    permission_classes = [permissions.IsAuthenticated]  
+
+def SignUp(request):
+    if request.method == 'POST':
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        first_name = request.data.get('first_name')
+        last_name = request.data.get('last_name')
+
+        user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+
+        return Response({'message': 'User signed up successfully'}, status=status.HTTP_201_CREATED)
+    
+    return Response({'message': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class HomeView(APIView):
+    permission_classes = (IsAuthenticated, )
+    def get(self, request):
+        content = {'message': 'Welcome to the JWT Authentication page using React Js and Django!'}
+        return Response(content)
+
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+    def post(self, request): 
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST) 
 
 class BeerViewSet(viewsets.ModelViewSet):
     queryset = Beer.objects.all()
