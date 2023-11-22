@@ -39,6 +39,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'courtyardbrewery-backend-production.up.railway.app',
     'courtyardbrewery-backend.railway.internal',
+    'http://localhost:8000',
+    'localhost'
 ]
 
 

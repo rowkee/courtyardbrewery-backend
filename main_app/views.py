@@ -8,8 +8,9 @@ from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import CreateAPIView
 
-from .serializers import BeerSerializer, CustomerSerializer, OrderSerializer, ReviewSerializer, RatingSerializer, MerchSerializer, UserSerializer, GroupSerializer, ImageSerializer
+from .serializers import BeerSerializer, CustomerSerializer, OrderSerializer, ReviewSerializer, RatingSerializer, MerchSerializer, UserSerializer, GroupSerializer, ImageSerializer, SignUpSerializer
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -22,19 +23,26 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]  
 
-def SignUp(request):
-    if request.method == 'POST':
-        username = request.data.get('username')
-        email = request.data.get('email')
-        password = request.data.get('password')
-        first_name = request.data.get('first_name')
-        last_name = request.data.get('last_name')
+class SignUpView(CreateAPIView):
+    ''' View for Users Registration /register POST'''
+    queryset = User.objects.all()
+    serializer_class = SignUpSerializer
 
-        user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+# def SignUp(request):
+#     if request.method == 'POST':
+#         username = request.data.get('username')
+#         email = request.data.get('email')
+#         password = request.data.get('password')
+#         first_name = request.data.get('first_name')
+#         last_name = request.data.get('last_name')
 
-        return Response({'message': 'User signed up successfully'}, status=status.HTTP_201_CREATED)
+#         user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+#         user.save()
+
+#         return Response({'message': 'User signed up successfully'}, status=status.HTTP_201_CREATED)
     
-    return Response({'message': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+#     return Response({'message': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class HomeView(APIView):
