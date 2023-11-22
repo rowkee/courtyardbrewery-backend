@@ -73,6 +73,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://courtyardbrewery-backend.railway.internal',
+    'https://courtyardbrewery-backend-production.up.railway.app',
+    'https://*courtyardbrewery-backend-production.up.railway.app',
+    'https://*.railway.app/'
+]
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
