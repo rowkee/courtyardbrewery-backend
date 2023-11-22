@@ -36,7 +36,10 @@ SECRET_KEY = 'django-insecure-oa*s@m_z1s55rwb6!e0mx=eyd%j5h_1i01stt_j3sv+xoyk9$_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'courtyardbrewery-backend-production.up.railway.app',
+    'courtyardbrewery-backend.railway.internal',
+]
 
 
 # Application definition
