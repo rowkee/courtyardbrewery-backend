@@ -30,7 +30,6 @@ router.register(r'orders', views.OrderViewSet)
 router.register(r'ratings', views.RatingViewSet)
 router.register(r'reviews', views.ReviewViewSet)
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
