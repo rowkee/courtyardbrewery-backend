@@ -40,4 +40,5 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name ='logout'),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('beer/review/<int:beer_id>/', views.FilteredReviewSet.as_view({'get':'list'}), name = 'filtered_reviews')
 ]

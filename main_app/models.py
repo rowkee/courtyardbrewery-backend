@@ -33,14 +33,7 @@ class Beer(models.Model):
 
     def __str__(self):
         return self.title 
-
-class Image(models.Model):
-    url = models.CharField(max_length=200)
-    image = models.ImageField()
-    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Photo for beer_id: {self.beer_id} @{self.url}"
+    
 
 class Merch(models.Model):
     title = models.CharField(max_length=50, unique = True)
@@ -49,7 +42,7 @@ class Merch(models.Model):
     max_length=3,
     choices=SIZES,
     default=SIZES[2][0]
-  )
+    )
     description = models.TextField()
     short_description = models.CharField(max_length=100)
     image = models.ImageField()
@@ -61,7 +54,7 @@ class Merch(models.Model):
 class Review(models.Model):
     title = models.CharField(max_length=50)
     review_content = models.CharField(max_length=200)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
 
 

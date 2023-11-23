@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Customer, Beer, Order, Merch, Review, Rating, Image
+from .models import Customer, Beer, Order, Merch, Review, Rating
 from rest_framework import serializers
 import django.contrib.auth.password_validation as validation
 from django.contrib.auth.hashers import make_password
@@ -16,7 +16,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 class SignUpSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField()
     password_confirmation = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
@@ -59,6 +59,13 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review 
         fields = '__all__'
 
+class CreateReviewSerializer(serializers.ModelSerializer):
+    customer = UserSerializer()
+    beer = BeerSerializer()
+    class Meta:
+        model = Review
+        fields = ('title', 'review_content', 'customer', 'beer')
+
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,9 +76,4 @@ class RatingSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order 
-        fields = '__all__'
-
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
         fields = '__all__'
