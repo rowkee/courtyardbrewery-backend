@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
     'courtyardbrewery-backend-production.up.railway.app',
     'courtyardbrewery-backend.railway.internal',
     'http://localhost:8000',
-    'localhost'
+    'localhost',
+    'courtyardbrewery-frontend-production.up.railway.app'
 ]
 
 
@@ -63,7 +64,9 @@ INSTALLED_APPS = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
-    'https://courtyardbrewery-frontend-production.up.railway.app/'
+    'https://courtyardbrewery-frontend-production.up.railway.app/',
+    'https://courtyardbrewery-frontend-production.up.railway.app',
+
 ]
 
 CORS_ALLOW_METHODS = (
