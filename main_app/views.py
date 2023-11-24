@@ -69,6 +69,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    
 
 class FilteredReviewSet(viewsets.ModelViewSet):
     serializer_class= ReviewSerializer
