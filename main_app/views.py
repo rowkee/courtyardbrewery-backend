@@ -48,8 +48,7 @@ class LogoutView(APIView):
 class BeerViewSet(viewsets.ModelViewSet):
     queryset = Beer.objects.all()
     serializer_class = BeerSerializer
-    # permission_classes = [permissions.IsAuthenticated] 
-
+    permission_classes = [permissions.AllowAny] 
     
 
 class MerchViewSet(viewsets.ModelViewSet):

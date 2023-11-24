@@ -80,7 +80,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://courtyardbrewery-backend.railway.internal',
     'https://courtyardbrewery-backend-production.up.railway.app',
     'https://*courtyardbrewery-backend-production.up.railway.app',
-    'https://*.railway.app/'
+    'https://*.railway.app/',
+    'http://localhost'
 ]
 
 ROOT_URLCONF = 'backend.urls'
